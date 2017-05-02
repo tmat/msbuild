@@ -32,7 +32,7 @@ namespace Microsoft.Build.Utilities
 
                 if (mode == null)
                 {
-                    return null;
+                    return ProjectInstanceTranslationMode.Full;
                 }
 
                 if (mode.Equals("full", StringComparison.OrdinalIgnoreCase))
