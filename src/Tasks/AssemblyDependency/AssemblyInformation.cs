@@ -17,6 +17,7 @@ using System.Reflection.PortableExecutable;
 using System.Reflection.Metadata;
 #endif
 using System.Collections.Generic;
+using Microsoft.Build.Tasks.AssemblyDependency;
 
 namespace Microsoft.Build.Tasks
 {
@@ -203,13 +204,11 @@ namespace Microsoft.Build.Tasks
             out FrameworkName frameworkName
         )
         {
-            AssemblyInformation import = null;
-            using (import = new AssemblyInformation(path))
-            {
-                dependencies = import.Dependencies;
-                frameworkName = import.FrameworkNameAttribute;
-                scatterFiles = NativeMethodsShared.IsWindows ? import.Files : null;
-            }
+            var import = new AssemblyMetadata(path);
+
+            dependencies = import.Dependencies;
+            frameworkName = import.FrameworkName;
+            scatterFiles = import.ScatterFiles;
         }
 
         /// <summary>
